@@ -1,3 +1,5 @@
+package com.school;
+
 public class Person {
     private static int nextIdCounter = 1;
     protected int id;

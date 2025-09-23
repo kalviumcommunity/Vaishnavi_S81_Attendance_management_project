@@ -1,3 +1,5 @@
+package com.school;
+
 public class Student extends Person {
     private String gradeLevel;
 
