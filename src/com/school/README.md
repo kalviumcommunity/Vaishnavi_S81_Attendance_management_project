@@ -165,7 +165,23 @@ This improves code organization, reusability, and maintainability.
     - `saveAllRegistrations()`
     - `getAllPeople()`
 
- 🧠 SOLID Principle Applied
+- **Updated `Teacher.java` and `Staff.java`**
+  - Both now implement the `Storable` interface.
+  - Added `toDataString()` for file persistence.
+
+- **Refactored `AttendanceService.java`**
+  - Now depends on `RegistrationService` to look up students and courses by ID.
+  - Removed redundant helper lookup methods.
+  - Focused solely on attendance-related logic (`markAttendance`, `saveAttendanceData`).
+
+- **Refactored `Main.java`**
+  - Acts as the central orchestrator.
+  - Creates and wires `FileStorageService`, `RegistrationService`, and `AttendanceService`.
+  - Uses service methods to register users, create courses, and mark attendance.
+  - Displays all registered entities using `registrationService.getAllPeople()`.
+
+
+ 🧠 SOLID Principle Applied:
 **Single Responsibility Principle (SRP):**
 Each service class (`RegistrationService`, `AttendanceService`, etc.) now has a single, well-defined responsibility.  
 This ensures changes in one module (like student registration) don’t affect other modules (like attendance tracking).
