@@ -139,3 +139,53 @@ This allows the system to display detailed attendance information and use polymo
 1. Compile: `javac src/com/school/*.java`
 2. Run: `java -cp src com.school.Main`
 3. Check the generated `attendance_log.txt` file.
+
+---
+
+## Part 9: SOLID Service Layer — RegistrationService & AttendanceService Separation
+
+### 🎯 Goal
+Apply the **Single Responsibility Principle (SRP)** from the SOLID design principles by separating the system into dedicated service layers.  
+This improves code organization, reusability, and maintainability.
+
+
+ 🧩 Key Updates
+
+- **Created `RegistrationService.java`**
+  - Handles registration and management of `Student`, `Teacher`, `Staff`, and `Course` entities.
+  - Performs ID-based lookups and returns unified person lists.
+  - Saves all entity data using `FileStorageService`.
+  - Provides methods such as:
+    - `registerStudent()`
+    - `registerTeacher()`
+    - `registerStaff()`
+    - `createCourse()`
+    - `findStudentById()`
+    - `findCourseById()`
+    - `saveAllRegistrations()`
+    - `getAllPeople()`
+
+- **Updated `Teacher.java` and `Staff.java`**
+  - Both now implement the `Storable` interface.
+  - Added `toDataString()` for file persistence.
+
+- **Refactored `AttendanceService.java`**
+  - Now depends on `RegistrationService` to look up students and courses by ID.
+  - Removed redundant helper lookup methods.
+  - Focused solely on attendance-related logic (`markAttendance`, `saveAttendanceData`).
+
+- **Refactored `Main.java`**
+  - Acts as the central orchestrator.
+  - Creates and wires `FileStorageService`, `RegistrationService`, and `AttendanceService`.
+  - Uses service methods to register users, create courses, and mark attendance.
+  - Displays all registered entities using `registrationService.getAllPeople()`.
+
+
+ 🧠 SOLID Principle Applied:
+**Single Responsibility Principle (SRP):**
+Each service class (`RegistrationService`, `AttendanceService`, etc.) now has a single, well-defined responsibility.  
+This ensures changes in one module (like student registration) don’t affect other modules (like attendance tracking).
+
+---
+
+

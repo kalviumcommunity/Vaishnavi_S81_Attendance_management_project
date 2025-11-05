@@ -1,37 +1,41 @@
-package com.school;
 
-import java.util.*;
+
+package com.school;
 
 public class Main {
     public static void main(String[] args) {
+        FileStorageService fileStorageService = new FileStorageService();
+        RegistrationService registrationService = new RegistrationService(fileStorageService);
+        AttendanceService attendanceService = new AttendanceService(fileStorageService, registrationService);
 
-        FileStorageService storage = new FileStorageService();
-        AttendanceService attendanceService = new AttendanceService(storage);
+        // Register entities
+        Student s1 = new Student(1, "Alice", "CS");
+        Student s2 = new Student(2, "Bob", "Math");
+        Teacher t1 = new Teacher(1, "Dr. Sharma", "Physics");
+        Staff st1 = new Staff(1, "Rajesh", "Admin");
 
-        // Create students
-        List<Student> allStudents = new ArrayList<>();
-        allStudents.add(new Student(1, "Alice", "Computer Science"));
-        allStudents.add(new Student(2, "Bob", "Mathematics"));
-        allStudents.add(new Student(3, "Charlie", "Physics"));
+        Course c1 = new Course(1, "Java Fundamentals", t1);
 
-        // Create courses
-        List<Course> allCourses = new ArrayList<>();
-        allCourses.add(new Course(101, "OOP with Java"));
-        allCourses.add(new Course(102, "Data Structures"));
+        registrationService.registerStudent(s1);
+        registrationService.registerStudent(s2);
+        registrationService.registerTeacher(t1);
+        registrationService.registerStaff(st1);
+        registrationService.createCourse(c1);
 
-        // ✅ Mark attendance (using object references)
-        attendanceService.markAttendance(allStudents.get(0), allCourses.get(0), "Present");
-        attendanceService.markAttendance(allStudents.get(1), allCourses.get(1), "Absent");
+        // Mark attendance
+        attendanceService.markAttendance(1, 1, "Present");
+        attendanceService.markAttendance(2, 1, "Absent");
 
-        // ✅ Mark attendance (using IDs)
-        attendanceService.markAttendance(3, 102, "Present", allStudents, allCourses);
+        // Display directory
+        System.out.println("\nSchool Directory:");
+        for (Person p : registrationService.getAllPeople()) {
+            System.out.println(p);
+        }
 
-        // ✅ Display logs
-        attendanceService.displayAttendanceLog();
-        attendanceService.displayAttendanceLog(allStudents.get(0));
-        attendanceService.displayAttendanceLog(allCourses.get(1));
-
-        // ✅ Save to file
+        // Save data
+        registrationService.saveAllRegistrations();
         attendanceService.saveAttendanceData();
+
+        System.out.println("\n✅ Data saved successfully!");
     }
 }
