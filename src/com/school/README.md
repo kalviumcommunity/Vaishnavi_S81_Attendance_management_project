@@ -108,3 +108,34 @@ Implemented Storable in:
 -Each class overrides toDataString() for consistent saving.
 -Followed abstraction and interface-driven design.
 -Prepared for file persistence in later parts.
+
+
+---
+
+## Part 7: Polymorphic Behaviour in Attendance and Displaying Reports
+
+### 📘 Overview
+In this part, the project demonstrates **runtime polymorphism** by using the `Person` hierarchy (`Student`, `Teacher`, `Staff`) and refines the `AttendanceRecord` class to work directly with objects instead of IDs.  
+This allows the system to display detailed attendance information and use polymorphism to handle different types of people in the school seamlessly.
+
+
+### 🧠 Concepts Demonstrated
+- **Runtime Polymorphism (Dynamic Method Dispatch):**
+  The `displayDetails()` method behaves differently based on the actual object type (`Student`, `Teacher`, or `Staff`).
+- **Object Composition:**
+  `AttendanceRecord` now holds object references, showing a strong “has-a” relationship.
+- **Interface-driven persistence** from previous parts continues to work with updated structure.
+
+
+---
+
+## Part 8: Overloaded Commands: Multiple Ways to Mark and Query Attendance
+- Implemented AttendanceService with overloaded `markAttendance` and `displayAttendanceLog` methods.
+- Demonstrated flexible attendance marking using both objects and IDs.
+- Integrated `FileStorageService` for saving records.
+- Verified functionality through console output and saved `attendance_log.txt`.
+
+### How to Run
+1. Compile: `javac src/com/school/*.java`
+2. Run: `java -cp src com.school.Main`
+3. Check the generated `attendance_log.txt` file.
