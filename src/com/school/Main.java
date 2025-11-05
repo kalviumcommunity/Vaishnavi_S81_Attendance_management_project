@@ -1,32 +1,37 @@
 package com.school;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
 
-        // Students
-        ArrayList<Student> students = new ArrayList<>();
-        students.add(new Student(1, "Alice", "Grade 10"));
-        students.add(new Student(2, "Bob", "Grade 11"));
-
-        // Courses
-        ArrayList<Course> courses = new ArrayList<>();
-        courses.add(new Course(101, "Mathematics"));
-        courses.add(new Course(102, "Science"));
-
-        // Attendance Records
-        ArrayList<AttendanceRecord> records = new ArrayList<>();
-        records.add(new AttendanceRecord(1, 101, "Present"));
-        records.add(new AttendanceRecord(2, 101, "Absent"));
-        records.add(new AttendanceRecord(1, 102, "Late")); // Invalid test
-
-        // File Storage
         FileStorageService storage = new FileStorageService();
-        storage.saveData(students, "students.txt");
-        storage.saveData(courses, "courses.txt");
-        storage.saveData(records, "attendance_log.txt");
+        AttendanceService attendanceService = new AttendanceService(storage);
 
-        System.out.println("\nCheck the text files for saved data.");
+        // Create students
+        List<Student> allStudents = new ArrayList<>();
+        allStudents.add(new Student(1, "Alice", "Computer Science"));
+        allStudents.add(new Student(2, "Bob", "Mathematics"));
+        allStudents.add(new Student(3, "Charlie", "Physics"));
+
+        // Create courses
+        List<Course> allCourses = new ArrayList<>();
+        allCourses.add(new Course(101, "OOP with Java"));
+        allCourses.add(new Course(102, "Data Structures"));
+
+        // ✅ Mark attendance (using object references)
+        attendanceService.markAttendance(allStudents.get(0), allCourses.get(0), "Present");
+        attendanceService.markAttendance(allStudents.get(1), allCourses.get(1), "Absent");
+
+        // ✅ Mark attendance (using IDs)
+        attendanceService.markAttendance(3, 102, "Present", allStudents, allCourses);
+
+        // ✅ Display logs
+        attendanceService.displayAttendanceLog();
+        attendanceService.displayAttendanceLog(allStudents.get(0));
+        attendanceService.displayAttendanceLog(allCourses.get(1));
+
+        // ✅ Save to file
+        attendanceService.saveAttendanceData();
     }
 }
