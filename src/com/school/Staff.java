@@ -1,27 +1,28 @@
-
-
 package com.school;
 
 public class Staff extends Person implements Storable {
-    private String role;
+    private String staffRole;
 
-    public Staff(int id, String name, String role) {
+    public Staff(int id, String name, String staffRole) {
         super(id, name);
-        this.role = role;
+        this.staffRole = staffRole;
     }
 
-    public String getRole() {
-        return role;
+    public String getStaffRole() { return staffRole; }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("ID: " + id + ", Name: " + name);
+        System.out.println("Staff Role: " + staffRole + " (Role: Staff)");
     }
 
     @Override
     public String toDataString() {
-        return id + "," + name + "," + role;
+        return id + "," + name + "," + staffRole;
     }
 
     @Override
     public String toString() {
-        return "Staff{" + "id=" + id + ", name='" + name + "', role='" + role + "'}";
+        return "Staff{id=" + id + ", name='" + name + "', staffRole='" + staffRole + "'}";
     }
 }
-

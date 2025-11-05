@@ -188,4 +188,48 @@ This ensures changes in one module (like student registration) don’t affect ot
 
 ---
 
+## Part 10: Capacity Management & SOLID Principles Reflection
+
+##  Overview
+This is the **final part (Part 10)** of the Attendance Management System project.  
+In this stage, you implemented **course capacity management** and **automatic student enrollment**, concluding the system with a reflection on how **SOLID principles** were applied throughout the project.
+
+## 🎯 Goal
+To implement course capacity handling, automatic section balancing, and reinforce SOLID principles in the overall project architecture.
+
+## 🧩 Features Implemented
+- **Enhanced `Course.java`**:
+  - Added `capacity` and `List<Student> enrolledStudents`.
+  - Updated constructor to accept capacity as a parameter.
+  - Added methods:
+    - `getCapacity()`
+    - `getEnrolledStudents()`
+    - `getNumberOfEnrolledStudents()`
+    - `addStudent(Student student)` — Enrolls student if capacity allows.
+  - Updated `displayDetails()` to show course capacity and enrolled student count.
+  - Updated `toDataString()` to include capacity field for file saving.
+
+- **Modified `RegistrationService.java`**:
+  - `createCourse()` updated to accept course capacity.
+  - Added `enrollStudentInCourse(Student student, Course course)`:
+    - Automatically checks capacity before enrollment.
+    - Prints success/failure messages based on availability.
+
+- **Updated `Main.java`**:
+  - Demonstrates course creation with capacities.
+  - Shows successful and failed enrollment attempts.
+  - Calls `course.displayDetails()` to verify course capacity.
+  - Persists updated data using `registrationService.saveAllRegistrations()`.
+
+
+## ⚙️ How to Run
+```bash
+# Compile all Java files
+javac src/com/school/*.java
+
+# Run the main program
+java -cp src com.school.Main
+
+
+-----
 

@@ -1,4 +1,3 @@
-
 package com.school;
 
 public class Teacher extends Person implements Storable {
@@ -9,8 +8,12 @@ public class Teacher extends Person implements Storable {
         this.subject = subject;
     }
 
-    public String getSubject() {
-        return subject;
+    public String getSubject() { return subject; }
+
+    @Override
+    public void displayDetails() {
+        System.out.println("ID: " + id + ", Name: " + name);
+        System.out.println("Subject: " + subject + " (Role: Teacher)");
     }
 
     @Override
@@ -20,6 +23,6 @@ public class Teacher extends Person implements Storable {
 
     @Override
     public String toString() {
-        return "Teacher{" + "id=" + id + ", name='" + name + "', subject='" + subject + "'}";
+        return "Teacher{id=" + id + ", name='" + name + "', subject='" + subject + "'}";
     }
 }
